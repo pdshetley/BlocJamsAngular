@@ -1,9 +1,13 @@
-var albumPicasso = {
+(function() {
+     function Fixtures() {
+         var Fixtures = {};
+         
+         var albumPicasso = {
      name: 'The Colors',
      artist: 'Pablo Picasso',
      label: 'Cubism',
      year: '1881',
-     albumArtUrl: 'assets/images/album_covers/01.png',
+     albumArtUrl: '/assets/images/album_covers/01.png',
      songs: [
          { name: 'Blue', length: 161.71, audioUrl: '/assets/music/bloc_jams_music/blue' },
          { name: 'Green', length: 103.96, audioUrl: '/assets/music/bloc_jams_music/green' },
@@ -18,7 +22,7 @@ var albumMarconi = {
      artist: 'Guglielmo Marconi',
      label: 'EM',
      year: '1909',
-     albumArtUrl: 'assets/images/album_covers/20.png',
+     albumArtUrl: '/assets/images/album_covers/20.png',
      songs: [
          { name: 'Hello, Operator?', length: '1:01' },
          { name: 'Ring, ring, ring', length: '5:01' },
@@ -27,3 +31,18 @@ var albumMarconi = {
          { name: 'Wrong phone number', length: '2:15'}
      ]
  };
+         
+  Fixtures.getAlbum = function() {
+      return albumPicasso;
+  };
+         
+  return Fixtures;
+}
+    Fixtures.getCollection = function() {
+        return 
+    }
+ 
+     angular
+         .module('blocJams')
+         .factory('Fixtures', Fixtures);
+ })();
