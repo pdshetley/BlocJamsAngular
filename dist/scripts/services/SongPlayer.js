@@ -29,17 +29,33 @@
             });
             
             SongPlayer.currentSong = song;
-        }; 
+        };
+         
+         /** 
+         * @function playSong
+         * @desc Play a song
+         * @param {Object} song
+         **/
         var playSong = function(song) {
             currentBuzzObject.play();
             song.playing = true;
         };
-        
+        /** 
+         * @function stopSong
+         * @desc Stops a song
+         * @param {Object} song
+         **/
         var stopSong = function(song) {
             currentBuzzObject.stop();
             song.playing = false;
         };
         
+         /** 
+         * @function getSongIndex
+         * @desc Get index of song in the songs array
+         * @param {Object} song
+         * @returns {Number}
+         **/
         // This function will get the index of a song
         var getSongIndex = function(song) {
           return currentAlbum.songs.indexOf(song);  
@@ -52,6 +68,11 @@
         //This is now a public attribute so we can use it within the player bar.
         SongPlayer.currentSong = null;
         
+         /**
+         * @function play
+         * @desc Play current or new song
+         * @param {Object} song
+         **/
         SongPlayer.play = function(song) {
             /* We use || to tell the function: assign (1) the value of song or (2) the value of SongPlayer.currentSong to the song variable. The first condition occurs when we call the methods from the Album view's song rows, and the second condition occurs when we call the methods from the player bar. */
             song = song || SongPlayer.currentSong;
@@ -72,6 +93,11 @@
             }
         };
         
+         /**
+         * @function pause
+         * @desc Pause current song
+         * @param {Object} song
+         **/
         SongPlayer.pause = function(song) {
             song = song || SongPlayer.currentSong;
             currentBuzzObject.pause();
