@@ -41,7 +41,7 @@
          * @function playSong
          * @desc Play a song
          * @param {Object} song
-         **/
+         */
         var playSong = function(song) {
             currentBuzzObject.play();
             song.playing = true;
