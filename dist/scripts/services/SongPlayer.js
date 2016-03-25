@@ -1,9 +1,11 @@
 (function() {
-     function SongPlayer(Fixtures) {
+     function SongPlayer($rootScope, Fixtures) {
           var SongPlayer = {};
          // private attribute stores album information
         var currentAlbum = Fixtures.getAlbum();
         SongPlayer.currentAlbum = currentAlbum;
+         
+         SongPlayer.volume = 60;
          
  /**
  * @desc Buzz object audio file
@@ -28,6 +30,12 @@
                 preload: true
             });
             
+            currentBuzzObject.bind('timeupdate', function() {
+                $rootScope.$apply(function() {
+                    SongPlayer.currentTime = currentBuzzObject.getTime();
+                });
+            });
+            
             SongPlayer.currentSong = song;
         };
          
@@ -35,7 +43,7 @@
          * @function playSong
          * @desc Play a song
          * @param {Object} song
-         **/
+         */
         var playSong = function(song) {
             currentBuzzObject.play();
             song.playing = true;
@@ -67,6 +75,11 @@
         */
         //This is now a public attribute so we can use it within the player bar.
         SongPlayer.currentSong = null;
+        /**
+        * @desc Current playback time (in seconds) of currently playing song
+        * @type {Number}
+        */
+        SongPlayer.currentTime = null;
         
          /**
          * @function play
@@ -131,13 +144,30 @@
                 setSong(song);
                 playSong(song);
             }
-            
         };
+         
+             /**
+             * @function setCurrentTime
+             * @desc Set current time (in seconds) of currently playing song
+             * @param {Number} time
+             */
+             SongPlayer.setCurrentTime = function(time) {
+                 if (currentBuzzObject) {
+                     currentBuzzObject.setTime(time);
+                 }
+            };
+         
+             SongPlayer.setVolume = function(volume) {
+                SongPlayer.volume = volume;
+                if (currentBuzzObject) {
+                    currentBuzzObject.setVolume(volume);
+                }
+             };
         
         return SongPlayer;
     }
  
      angular
          .module('blocJams')
-         .factory('SongPlayer', SongPlayer);
+         .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
  })();
