@@ -136,7 +136,7 @@
             currentSongIndex++;
             
             // To test this, I've chosen the current number of songs: 5. Not sure what .length I should be testing here.
-            if (currentSongIndex >= currentAlbum.songs.length) {
+            if (currentSongIndex >= currentAlbum.songs.duration) {
                 currentBuzzObject.stop();
                 SongPlayer.currentSong.playing = null;
             } else {
